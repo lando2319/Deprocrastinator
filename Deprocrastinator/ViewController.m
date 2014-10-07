@@ -122,6 +122,8 @@
     }
 
     self.isDone = !self.isDone;
+
+    self.tableViewToDo.editing = !self.tableViewToDo.editing;
 }
 
 -(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -165,8 +167,17 @@
     return YES; //tableview must be editable or nothing will work...
 }
 
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
 
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    NSString *stringToMove = [self.listArray objectAtIndex:sourceIndexPath.row];
 
+    [self.listArray removeObjectAtIndex:sourceIndexPath.row];
+    [self.listArray insertObject:stringToMove atIndex:destinationIndexPath.row];
+
+}
 
 
 
