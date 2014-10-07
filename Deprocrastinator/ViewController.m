@@ -125,26 +125,38 @@
 }
 
 -(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewRowAction *button = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"     " handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+
+    UITableViewRowAction *button = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                     {
                                         NSLog(@"Action to perform with Button 1");
+                                        [self.listArray removeObjectAtIndex:indexPath.row];
+                                        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                                        [self.tableViewToDo reloadData];
                                     }];
-    button.backgroundColor = [UIColor greenColor]; //arbitrary color
-    UITableViewRowAction *button2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"     " handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+    button.backgroundColor = [UIColor brownColor]; //arbitrary color
+    UITableViewRowAction *button4 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"High" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                      {
                                          NSLog(@"Action to perform with Button2!");
+                                         cell.textLabel.backgroundColor = [UIColor redColor];
                                      }];
-    button2.backgroundColor = [UIColor blueColor]; //arbitrary color
-
-    UITableViewRowAction *button3 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+    button4.backgroundColor = [UIColor redColor]; //arbitrary color
+    UITableViewRowAction *button2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Medium" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                      {
-                                         [self.listArray removeObjectAtIndex:indexPath.row];
-                                         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-                                         [self.tableViewToDo reloadData];
+                                         cell.textLabel.backgroundColor = [UIColor yellowColor];
+                                         NSLog(@"Action to perform with Button2!");
                                      }];
-    button3.backgroundColor = [UIColor redColor]; //arbitrary color
+    button2.backgroundColor = [UIColor yellowColor]; //arbitrary color
 
-    return @[button, button2, button3]; //array with all the buttons you want. 1,2,3, etc...
+    UITableViewRowAction *button3 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Low" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                     {
+                                         cell.textLabel.backgroundColor = [UIColor greenColor];
+                                         NSLog(@"Action to perform with Button3!");
+                                     }];
+    button3.backgroundColor = [UIColor greenColor]; //arbitrary color
+
+    return @[button, button3, button2, button4]; //array with all the buttons you want. 1,2,3, etc...
 }
 
 
