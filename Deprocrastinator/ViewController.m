@@ -24,12 +24,17 @@
     self.listArray = [NSMutableArray array];
 
     self.isDone = NO;
+
+    NSLog(@"%@", self.textBox);
+
+
 }
 
 
 - (IBAction)prioritySwipe:(UISwipeGestureRecognizer *)sender {
     UITableViewCell *cell = (UITableViewCell *)sender.view;
     cell.textLabel.backgroundColor = [UIColor redColor];
+
 }
 
 
@@ -119,7 +124,34 @@
     self.isDone = !self.isDone;
 }
 
+-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *button = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"     " handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                    {
+                                        NSLog(@"Action to perform with Button 1");
+                                    }];
+    button.backgroundColor = [UIColor greenColor]; //arbitrary color
+    UITableViewRowAction *button2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"     " handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                     {
+                                         NSLog(@"Action to perform with Button2!");
+                                     }];
+    button2.backgroundColor = [UIColor blueColor]; //arbitrary color
 
+    UITableViewRowAction *button3 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                     {
+                                         [self.listArray removeObjectAtIndex:indexPath.row];
+                                         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                                         [self.tableViewToDo reloadData];
+                                     }];
+    button3.backgroundColor = [UIColor redColor]; //arbitrary color
+
+    return @[button, button2, button3]; //array with all the buttons you want. 1,2,3, etc...
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES; //tableview must be editable or nothing will work...
+}
 
 
 

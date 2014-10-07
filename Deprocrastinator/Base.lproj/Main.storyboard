@@ -54,10 +54,6 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="gcY-Pl-8ee" appends="YES" id="TMR-u0-auq"/>
-                                            <outletCollection property="gestureRecognizers" destination="aos-Vo-lgY" appends="YES" id="TR3-O8-4Sj"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -157,18 +153,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="gcY-Pl-8ee">
-                    <connections>
-                        <action selector="onSwipe:" destination="vXZ-lx-hvc" id="hFP-JK-pNv"/>
-                        <outlet property="delegate" destination="vXZ-lx-hvc" id="5S7-HN-at6"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="aos-Vo-lgY" userLabel="Priority Swipe Gesture Recognizer">
-                    <connections>
-                        <action selector="prioritySwipe:" destination="vXZ-lx-hvc" id="3r6-Jd-fMK"/>
-                        <outlet property="delegate" destination="vXZ-lx-hvc" id="rmL-Tl-GWn"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1257" y="407"/>
         </scene>
